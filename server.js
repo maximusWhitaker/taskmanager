@@ -189,9 +189,8 @@ app.post('/api/addEvent', async (req, res, next) => {
         if (err) throw err;
     });
     console.log("Event " + name + " added!");
-    const results = await db.collection('Events').find({Name: req.body.name}).toArray();
-    const insertedData = await db.collection('Events').find({Name: req.body.name}).toArray();
-    var ret = { id: insertedData[0]._id, name: name, description: description, error: '' };
+    const event = await db.collection('Events').findOne({ Name: name});
+    var ret = { id: event._id, name: name, description: description, error: '' };
     res.status(200).json(ret);
 
 });
@@ -309,6 +308,10 @@ app.post('/api/addTag', async (req, res, next) => {
         if (err) throw err;
     });
     console.log("Tag " + name + " added!");
+    const tag = await db.collection('Tags').findOne({ Name: name});
+    var ret = { id: tag._id, name: name, userId: userId, error: '' };
+    res.status(200).json(ret);
+    
     const results = await db.collection('Tags').find({Name: req.body.name}).toArray();
     const insertedData = await db.collection('Tags').find({Name: req.body.name}).toArray();
     var ret = { id: insertedData[0]._id, name: name, userId: userId, error: '' };
