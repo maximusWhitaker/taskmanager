@@ -312,10 +312,6 @@ app.post('/api/addTag', async (req, res, next) => {
     var ret = { id: tag._id, name: name, userId: userId, error: '' };
     res.status(200).json(ret);
     
-    const results = await db.collection('Tags').find({Name: req.body.name}).toArray();
-    const insertedData = await db.collection('Tags').find({Name: req.body.name}).toArray();
-    var ret = { id: insertedData[0]._id, name: name, userId: userId, error: '' };
-    res.status(200).json(ret);
 
 });
 
