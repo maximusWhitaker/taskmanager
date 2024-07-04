@@ -191,7 +191,7 @@ app.post('/api/addEvent', async (req, res, next) => {
     
     db.collection('Events').findOne({Name: name}, function(err, ret){
         var ret = { id: event._id, name: name, description: description, error: '' };
-    }
+    });
         res.status(200).json(ret);
 
 });
